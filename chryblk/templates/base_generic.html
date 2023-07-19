@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .app-name {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to right, #3b3b3b, #de6666);
+            color: rgb(174, 24, 24);
+            padding: 15px;
+            font-size: 24px;
+            z-index: 9999;
+        }
+        .sidebar {
+        position: fixed;
+        top: 50px;
+        left: 0;
+        bottom: 0;
+        width: 200px;
+        background-color: #f8f9fa;
+        padding-top: 20px;
+        }
+
+        .sidebar .list-group-item {
+            background: linear-gradient(to right, #ff8080, #ff4d4d);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 5px;
+            border: none;
+            border-radius: 10px;
+            color: black;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Add a small shadow */
+            cursor: pointer; 
+            transform-origin: center center;/* Add a pointer on hover */
+        }
+
+        .sidebar .list-group-item:hover {
+            transform: scale(1.1);
+        }
+
+        .content {
+            margin-left: -60px;
+            padding: 72px; /* Adjust this value to leave space for the sidebar */
+        }
+        .expense-row {
+        display: flex;
+        justify-content: space-between;
+        }
+
+        .expense-type, .expense-amount {
+            width: 48%; /* adjust this value as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-3 sidebar">
+                <!-- Sidebar content -->
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="list-group-item"><a href="{% url 'input_financial_data' %}">Input Financial Data</a></li>
+                </ul>
+            </div>
+            <div class="col-9 content">
+                <!-- Main content -->
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    <div class="app-name">
+        CherryBlack
+    </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h2>Input Financial Data</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            {% if field.name == 'expense' or field.name == 'expense_type' %}
+                <div class="form-group">
+                    <div class="{{ field.name }}">
+                        {{ field.errors }}
+                        {{ field.label_tag }}
+                        {{ field }}
+                    </div>
+                </div>
+            {% else %}
+                <div class="form-group">
+                    {{ field.errors }}
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div>
+            {% endif %}
+        {% endfor %}
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+{% endblock %}

@@ -1,6 +1,9 @@
-from django.urls import path
-from . import views  # Import views from current directory
+from django.urls import path, include
+from . import views
 
 urlpatterns = [
-    path('', views.user_input, name='user_input'),  # Define your custom route
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('', views.home, name='home'),
+    path('register/', views.register, name='register'),
+    path('input_financial_data/', views.input_financial_data, name='input_financial_data')
 ]
