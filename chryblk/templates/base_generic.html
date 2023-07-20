@@ -31,7 +31,8 @@
             margin-bottom: 5px;
             border: none;
             border-radius: 10px;
-            color: black;
+            border-style: outset;
+            color: rgba(0, 0, 0, 0.2);
             position: relative;
             overflow: hidden;
             display: flex;
@@ -57,6 +58,23 @@
         .expense-type, .expense-amount {
             width: 48%; /* adjust this value as needed */
         }
+        .logout-button {
+            background: linear-gradient(to right, #ff8080, #ff4d4d);
+            border-style: inset;
+            border-color: rgba(0, 0, 0, 0.2);
+            border-width: 3px;
+            border-radius: 10px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 9999;
+            color: rgba(0, 57, 229, 0.736);
+            transition: transform 0.3s, box-shadow 0.3s;
+            transform-origin: center center;
+        }
+        .logout-button button:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -80,5 +98,10 @@
     <div class="app-name">
         CherryBlack
     </div>
+    <form action="{% url 'chryblk:login' %}" method="POST" class="logout-button">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-link">Logout</button>
+    </form>
+</div>
 </body>
 </html>

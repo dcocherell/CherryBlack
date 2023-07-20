@@ -72,3 +72,10 @@ def report(request):
         'average_expense': average_expense,
         'average_net_income': average_net_income,
     })
+
+#create a logout view
+from django.contrib.auth import logout
+
+def logout_view(request):
+    logout(request)
+    return redirect('chryblk:logout')
