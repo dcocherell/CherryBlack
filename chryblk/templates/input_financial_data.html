@@ -4,23 +4,37 @@
     <h2>Input Financial Data</h2>
     <form method="post">
         {% csrf_token %}
-        {% for field in form %}
-            {% if field.name == 'expense' or field.name == 'expense_type' %}
-                <div class="form-group">
-                    <div class="{{ field.name }}">
-                        {{ field.errors }}
-                        {{ field.label_tag }}
-                        {{ field }}
-                    </div>
+        <div class="form-group">
+            {{ form.date.errors }}
+            <label>{{ form.date.label }}</label>
+            {{ form.date }}
+        </div>
+        <div class="form-group">
+            {{ form.income.errors }}
+            <label>{{ form.income.label }}</label>
+            {{ form.income }}
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group d-flex flex-column">
+                    {{ form.expense.errors }}
+                    <label>{{ form.expense.label }}</label>
+                    {{ form.expense }}
                 </div>
-            {% else %}
-                <div class="form-group">
-                    {{ field.errors }}
-                    {{ field.label_tag }}
-                    {{ field }}
+            </div>
+            <div class="col">
+                <div class="form-group d-flex flex-column">
+                    {{ form.expense_type.errors }}
+                    <label>{{ form.expense_type.label }}</label>
+                    {{ form.expense_type }}
                 </div>
-            {% endif %}
-        {% endfor %}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form.state.errors }}
+            <label>{{ form.state.label }}</label>
+            {{ form.state }}
+        </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>

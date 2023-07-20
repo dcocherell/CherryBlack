@@ -58,7 +58,7 @@ class FinancialDataForm(forms.Form):
     date = forms.DateField(label='Date', widget=forms.SelectDateWidget(years=range(2021, 2022)))
     income = forms.Field(label='Income($)')
     expense = forms.Field(label='Expense Amount($)')
-    state = forms.ChoiceField(choices=STATE_CHOICES, initial='', label="State")
+    
     expense_type_choices = [
         ('', '---Select---'),
         ('rent', 'Rent'),
@@ -67,6 +67,7 @@ class FinancialDataForm(forms.Form):
         ('travel', 'Travel (Miles)')
         # more expense types as needed
     ]
-    #create a button to add more expenses
-
     expense_type = forms.ChoiceField(label='Expense Type', choices=expense_type_choices)
+    # add a button to add more expense types
+    
+    state = forms.ChoiceField(choices=STATE_CHOICES, initial='', label="State")
