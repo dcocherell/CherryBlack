@@ -1,6 +1,6 @@
 from django import forms
-
-class FinancialDataForm(forms.Form):
+from chryblk.models import FinancialData
+class FinancialDataForm(forms.ModelForm):
     STATE_CHOICES = [
         ('', '---Select---'),
         ('AL', 'Alabama'),
@@ -55,19 +55,15 @@ class FinancialDataForm(forms.Form):
         ('WY', 'Wyoming'),
     ]
 
-    date = forms.DateField(label='Date', widget=forms.SelectDateWidget(years=range(2021, 2022)))
-    income = forms.Field(label='Income($)')
-    expense = forms.Field(label='Expense Amount($)')
-    
-    expense_type_choices = [
-        ('', '---Select---'),
-        ('rent', 'Rent'),
-        ('utilities', 'Utilities'),
-        ('groceries', 'Groceries'),
-        ('travel', 'Travel (Miles)')
-        # more expense types as needed
-    ]
-    expense_type = forms.ChoiceField(label='Expense Type', choices=expense_type_choices)
-    # add a button to add more expense types
-    
-    state = forms.ChoiceField(choices=STATE_CHOICES, initial='', label="State")
+    date = forms.DateField(widget=forms.SelectDateWidget(years=range(2021, 2022)))
+    state = forms.ChoiceField(choices=STATE_CHOICES, initial='')
+
+    class Meta:
+        model = FinancialData
+        fields = ['date', 'income', 'expense', 'expense_type', 'state']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['expense_type'].choices = [('', '---Select---'), ('rent', 'Rent'), ('utilities', 'Utilities'), ('groceries', 'Groceries'), ('travel', 'Travel (Miles)')]
+        self.fields['income'].label = 'Income($)'
+        self.fields['expense'].label = 'Expense Amount($)'

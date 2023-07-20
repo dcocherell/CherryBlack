@@ -1,0 +1,35 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>Financial Report</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Income</th>
+            <th>Expense</th>
+            <th>Expense Type</th>
+            <th>State</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in financial_data %}
+        <tr>
+            <td>{{ data.date }}</td>
+            <td>{{ data.income }}</td>
+            <td>{{ data.expense }}</td>
+            <td>{{ data.expense_type }}</td>
+            <td>{{ data.state }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Total Income: {{ total_income }}</h3>
+<h3>Total Expense: {{ total_expense }}</h3>
+<h3>Net Income: {{ net_income }}</h3>
+<h3>Average Income: {{ average_income }}</h3>
+<h3>Average Expense: {{ average_expense }}</h3>
+<h3>Average Net Income: {{ average_net_income }}</h3>
+
+{% endblock %}
