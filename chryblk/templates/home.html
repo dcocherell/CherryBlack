@@ -1,5 +1,33 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h2>{{ message }}</h2>
+  <h2>Stock Data</h2>
+  <table>
+    <thead>
+        <tr>
+            <th>Ticker</th>
+            <th>Date</th>
+            <th>Open Price</th>
+            <th>High Price</th>
+            <th>Low Price</th>
+            <th>Close Price</th>
+            <th>Volume</th>
+            <th>Change</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stock in quandl_data %}
+            <tr>
+                <td>{{ stock.ticker }}</td>
+                <td>{{ stock.date }}</td>
+                <td>{{ stock.open_price }}</td>
+                <td>{{ stock.high_price }}</td>
+                <td>{{ stock.low_price }}</td>
+                <td>{{ stock.close_price }}</td>
+                <td>{{ stock.volume }}</td>
+                <td>{{ stock.change }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}

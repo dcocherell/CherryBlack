@@ -10,3 +10,12 @@ class FinancialData(models.Model):
     state = models.CharField(max_length=2)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
+class QuandlData(models.Model):
+    ticker = models.CharField(max_length=10)  # for stock ticker symbols like 'AAPL', 'GOOGL', etc.
+    date = models.DateField()
+    open_price = models.FloatField()
+    high = models.FloatField()
+    low = models.FloatField()
+    close = models.FloatField()
+    volume = models.IntegerField()  # assuming volume is an integer
+    change = models.FloatField()

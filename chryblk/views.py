@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms.input_form import FinancialDataForm
-from .models import FinancialData
+from .models import FinancialData, QuandlData
 
 @login_required
 def home(request):
-    return render(request, 'home.html', {'message': 'Welcome to CherryBlack!'})
+    quandl_data = QuandlData.objects.all()
+    return render(request, 'home.html', {'quandl_data': quandl_data})
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
@@ -21,6 +22,7 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
 
+@login_required
 def input_financial_data(request):
     if request.method == 'POST':
         form = FinancialDataForm(request.POST)
