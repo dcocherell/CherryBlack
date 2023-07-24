@@ -19,3 +19,5 @@ class QuandlData(models.Model):
     close = models.FloatField()
     volume = models.IntegerField()  # assuming volume is an integer
     change = models.FloatField()
+    average = models.FloatField(default=0.00)
+    recommendation = models.CharField(default='Hold', max_length=10)

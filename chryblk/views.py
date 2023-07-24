@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms.input_form import FinancialDataForm
 from .models import FinancialData, QuandlData
+from .tasks import update_stocks
 
 @login_required
 def home(request):
     quandl_data = QuandlData.objects.all()
+    update_stocks.delay()
     return render(request, 'home.html', {'quandl_data': quandl_data})
 
 from django.contrib.auth.forms import UserCreationForm

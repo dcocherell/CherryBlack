@@ -2,8 +2,8 @@
 
 {% block content %}
   <h2>Stock Data</h2>
-  <table>
-    <thead>
+  <table class="table table-bordered"> <!-- Add Bootstrap classes -->
+    <thead class="thread-dark">
         <tr>
             <th>Ticker</th>
             <th>Date</th>
@@ -13,19 +13,23 @@
             <th>Close Price</th>
             <th>Volume</th>
             <th>Change</th>
+            <th>Average</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         {% for stock in quandl_data %}
             <tr>
-                <td>{{ stock.ticker }}</td>
+                <td class="blue_text">{{ stock.ticker }}</td>
                 <td>{{ stock.date }}</td>
-                <td>{{ stock.open_price }}</td>
-                <td>{{ stock.high_price }}</td>
-                <td>{{ stock.low_price }}</td>
-                <td>{{ stock.close_price }}</td>
+                <td>{{ stock.open_price|floatformat:2 }}</td> <!-- Apply floatformat filter -->
+                <td>{{ stock.high|floatformat:2 }}</td> <!-- Apply floatformat filter -->
+                <td>{{ stock.low|floatformat:2 }}</td> <!-- Apply floatformat filter -->
+                <td>{{ stock.close|floatformat:2 }}</td> <!-- Apply floatformat filter -->
                 <td>{{ stock.volume }}</td>
-                <td>{{ stock.change }}</td>
+                <td>{{ stock.change|floatformat:2 }}</td>
+                <td>{{ stock.average|floatformat:2}}</td>
+                <td class="{%if stock.recommendation == 'Buy' %}green_text{% elif stock.recommendation == 'Sell' %}red_text{% endif %}">{{ stock.recommendation}}</td> <!-- Apply floatformat filter -->
             </tr>
         {% endfor %}
     </tbody>
