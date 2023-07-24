@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -124,11 +123,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = 'chryblk:home'
 #redirect to home after account activation
 
-REDIS_URL = os.getenv('REDISGREEN_URL', 'redis://localhost:6379')
-
 # Celery Configuration Options
-CELERY_BROKER_URL = 'REDIS_URL'
-CELERY_RESULT_BACKEND = 'REDIS_URL'
+CELERY_BROKER_URL = 'redis://:x2e3xjfava48epyt5dat9kggskxg1x86q2q1zvybt9tpr2fn0a53@expeditious-yarrow-b8a91cc7a6.redisgreen.net:11042'
+CELERY_RESULT_BACKEND = 'redis://:x2e3xjfava48epyt5dat9kggskxg1x86q2q1zvybt9tpr2fn0a53@expeditious-yarrow-b8a91cc7a6.redisgreen.net:11042'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
