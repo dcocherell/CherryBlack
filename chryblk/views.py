@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms.input_form import FinancialDataForm
-from .models import FinancialData, QuandlData
-from .tasks import update_stocks
+from .models import FinancialData, QuandlData, DB_SAVES
+from .tasks import update_stocks, TASKS_FAILURE, TASKS_SUCCESS
+from django.http import JsonResponse
+from request.models import Request
 
 @login_required
 def home(request):
@@ -79,7 +81,19 @@ def report(request):
 
 #create a logout view
 from django.contrib.auth import logout
+from django.http import HttpResponse
 
 def logout_view(request):
     logout(request)
     return redirect('chryblk:logout')
+
+def health_check(request):
+    return JsonResponse({'status': 'ok'}, status=200)
+
+def metrics(request):
+    requests_per_second = Request.objects.count()
+    database_saves = DB_SAVES._value.get()
+    tasks_success = TASKS_SUCCESS._value.get()
+    tasks_failure = TASKS_FAILURE._value.get()
+    return JsonResponse({'requests_per_second': requests_per_second, 'database_saves': database_saves, 'task_failures': tasks_failure, 'task_success': tasks_success}, status=200)
+   

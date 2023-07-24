@@ -1,4 +1,4 @@
-from celery import shared_task
+from celery import shared_task, Celery, signals
 from .models import QuandlData
 import yfinance as yf
 from datetime import datetime
@@ -61,3 +61,22 @@ def update_stocks():
         )
 
         time.sleep(10)  # avoid hitting API limit
+
+from prometheus_client import Counter
+
+app = Celery('chryblk')
+
+TASKS_SUCCESS = Counter('tasks_success_total', 'Tasks success')
+TASKS_FAILURE = Counter('tasks_failure_total', 'Tasks failure')
+
+@app.task
+def add(x, y):
+    return x + y
+
+@app.task(bind=True)
+def on_success(self, retval, task_id, args, kwargs):
+    TASKS_SUCCESS.inc()
+
+@app.task(bind=True)
+def on_failure(self, exc, task_id, args, kwargs, einfo):
+    TASKS_FAILURE.inc()

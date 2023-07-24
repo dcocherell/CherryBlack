@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "request"
 ]
 
 MIDDLEWARE = [
@@ -38,6 +39,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "request.middleware.RequestMiddleware"
 ]
 
 ROOT_URLCONF = "CherryBlack.urls"
@@ -124,8 +126,8 @@ LOGIN_REDIRECT_URL = 'chryblk:home'
 #redirect to home after account activation
 
 # Celery Configuration Options
-CELERY_BROKER_URL = 'redis://:x2e3xjfava48epyt5dat9kggskxg1x86q2q1zvybt9tpr2fn0a53@expeditious-yarrow-b8a91cc7a6.redisgreen.net:11042'
-CELERY_RESULT_BACKEND = 'redis://:x2e3xjfava48epyt5dat9kggskxg1x86q2q1zvybt9tpr2fn0a53@expeditious-yarrow-b8a91cc7a6.redisgreen.net:11042'
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'

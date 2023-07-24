@@ -21,3 +21,13 @@ class QuandlData(models.Model):
     change = models.FloatField()
     average = models.FloatField(default=0.00)
     recommendation = models.CharField(default='Hold', max_length=10)
+
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from prometheus_client import Counter
+
+DB_SAVES = Counter('db_saves_total', 'Database saves')
+
+@receiver(pre_save)
+def increment_db_saves(sender, instance, **kwargs):
+    DB_SAVES.inc()

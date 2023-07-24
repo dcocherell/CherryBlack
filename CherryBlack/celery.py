@@ -14,6 +14,9 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
 
+app.conf.task_send_sent_event = True
+app.conf.worker_send_task_events = True
+
 @app.task(bind=True)
 def debug_task(self):
     print(f'Request: {self.request!r}')
