@@ -124,7 +124,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = 'chryblk:home'
 #redirect to home after account activation
 
-REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379')
+REDIS_URL = os.getenv('REDISGREEN_URL', 'redis://localhost:6379')
 
 # Celery Configuration Options
 CELERY_BROKER_URL = 'REDIS_URL'
